@@ -43,7 +43,7 @@ data <- master_data %>%
 
 vars <- colnames(data)
 
-print(vars)
+# print(vars)
 
 
 # With Filter -------------------------------------------------------------
@@ -110,7 +110,7 @@ for (i in seq_along(services_change_filter_list)) {
 # Combine all the data frames into one
 services_change_with_filter <- dplyr::bind_rows(services_change_filter_list)
 
-print(head(services_change_with_filter))
+# print(head(services_change_with_filter))
 
 
 # Bind the data generated in loop
@@ -140,7 +140,7 @@ services_change_no_filter <- purrr::map_dfr(
 # Combine filtered and unfiltered data
 services_change_data <- dplyr::bind_rows(services_change_with_filter, services_change_no_filter)
 
-print(head(services_change_data))
+# print(head(services_change_data))
 
 # Categorize services
 services_change_data <- services_change_data %>%

@@ -31,7 +31,7 @@ test_that(
   "golem-config works",
   {
     config_file <- app_sys("golem-config.yml")
-    skip_if(config_file == "")
+    skip_if(config_file == "" | config_file == NULL)
 
     expect_true(
       get_golem_config(

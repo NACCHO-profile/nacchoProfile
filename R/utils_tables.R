@@ -1501,8 +1501,8 @@ create_non_time_table <- function(data, category, colors, topic) {
   }
 
   # Debugging: Print data to verify it includes Type
-  message("Data after grouping by 'Type':")
-  print(head(data))
+  # message("Data after grouping by 'Type':")
+  # print(head(data))
 
 
   # Helper for formatting numbers
@@ -1630,7 +1630,7 @@ create_non_time_table <- function(data, category, colors, topic) {
   }
 
   # Debugging messages for troubleshooting
-  message("Selected columns: ", paste(selected_columns, collapse = ", "))
+  # message("Selected columns: ", paste(selected_columns, collapse = ", "))
 
   # Ensure selected_columns is not empty
   if (length(selected_columns) == 0) {

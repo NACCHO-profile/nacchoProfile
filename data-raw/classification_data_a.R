@@ -49,7 +49,7 @@ classification_data_a <- rbind(class_a_with_filter, class_a_no_filter)
 
 # print elapsed time
 end_time <- Sys.time() - start_time # calculate difference
-print(end_time) # 1.3 minutes
+# print(end_time) # 1.3 minutes
 
 
 usethis::use_data(classification_data_a, overwrite = TRUE)

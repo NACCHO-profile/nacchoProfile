@@ -74,7 +74,7 @@ jobs_data <- jobs_data %>%
 end_time <- Sys.time() - start_time # calculate difference
 
 # This shows how much time the script took
-print(end_time) # 7.931908 secs
+# print(end_time) # 7.931908 secs
 
 
 

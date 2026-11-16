@@ -63,7 +63,7 @@ for (i in seq_along(boxplot_list)) {
 
 # Print elapsed time
 end_time <- Sys.time() - start_time # calculate time difference
-print(end_time)
+# print(end_time)
 
 # Save the boxplot_list dataset
 usethis::use_data(boxplot_list, overwrite = TRUE)

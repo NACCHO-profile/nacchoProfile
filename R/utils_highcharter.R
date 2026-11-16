@@ -158,11 +158,11 @@ set_column <- function(data,
   # Also check for non-printing characters or unusual encodings
   data$category <- iconv(data$category, "latin1", "UTF-8")
 
-  print(data$category)
+  # print(data$category)
 
   x_axis_labels <- as.list(unique(data$category))
 
-  print(x_axis_labels)
+  # print(x_axis_labels)
 
   highcharter::hchart(
     data,
