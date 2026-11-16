@@ -532,6 +532,20 @@ mod_topic_areas_server <- function(id){
 
       data <- process_table_data(topic, filtering, classifications)
 
+      if (topic == "chachip") {
+        if ("Responses_All LHDs" %in% names(data)) {
+          data$`Responses_All LHDs` <- 1055
+        }
+      }
+
+      data <- data %>%
+        dplyr::mutate(
+          dplyr::across(
+            dplyr::starts_with("Responses_"),
+            ~ ifelse(is.na(.), 0, .)
+          )
+        )
+
       data <- data %>%
         dplyr::mutate(
           dplyr::across(dplyr::starts_with("Responses_"), ~ ifelse(is.na(.), 0, .))

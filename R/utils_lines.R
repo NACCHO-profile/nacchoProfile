@@ -657,7 +657,7 @@ process_line_data <- function(option, filtering, classifications = NULL) {
                         two = paste(y)) %>%
           dplyr::arrange(year)
       } else {
-        combined <- dplyr::full_join(current_data, hist_data,
+        combined <- join_line_data(current_data, hist_data,
                                      by = c("Question" = "topic",
                                             "group" = "group",
                                             "filter" = "filter",
@@ -671,6 +671,10 @@ process_line_data <- function(option, filtering, classifications = NULL) {
                         one = paste("the", tolower(category), "number of total employees across LHDs was"),
                         two = paste(" ", y)) %>%
           dplyr::arrange(year)
+        combined <- combined %>%
+          dplyr::filter(
+            !(year == 2025 & category == "Mean" & y == 74)
+          )
       }
 
     } else if (option %in%  c("fte_bypop", "employee_bypop")){
@@ -1366,7 +1370,7 @@ process_line_data <- function(option, filtering, classifications = NULL) {
           dplyr::arrange(year)
       } else {
         ###combine
-        combined <- dplyr::full_join(current_data, hist_data,
+        combined <- join_line_data(current_data, hist_data,
                                      by = c("Question" = "topic",
                                             "group" = "group",
                                             "filter" = "filter",

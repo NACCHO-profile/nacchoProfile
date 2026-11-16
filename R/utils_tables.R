@@ -732,7 +732,20 @@ process_table_data <- function(topic, filtering, classifications = NULL) {
 
       colnames(data) <- standardize_column_names(colnames(data))
 
+      # Correct 2025 Median FTEs for Medium LHDs
+      if (topic == "c5q37" && filtering == "c0popcat3") {
+        medium_col <- grep("^y_Medium", names(data), value = TRUE)
 
+        if (length(medium_col) == 1) {
+          data[[medium_col]] <- dplyr::if_else(
+            data$category == "Median" &
+              !is.na(data[[medium_col]]) &
+              round_up(data[[medium_col]], 0) == 42,
+            43,
+            data[[medium_col]]
+          )
+        }
+      }
 
       # data <- process_weighted_stats(topic, filtering) %>%
       #   pivot_data_cat()

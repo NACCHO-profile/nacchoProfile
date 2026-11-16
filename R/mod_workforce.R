@@ -798,7 +798,7 @@ mod_workforce_server <- function(id) {
         line_graph %>%
           viz_options(
             viz_caption = paste(
-              "<b> N: </b>", show_n(data$Responses),
+              "<b> N: </b>", show_n(sort(as.numeric(data$Responses))),
               "<br>", source_line
             ),
             tooltip = filter_meta()$tooltip
