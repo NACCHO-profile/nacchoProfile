@@ -291,7 +291,7 @@ master_data$rev_percap_numcat <- haven::labelled(
 
 # print elapsed time
 end_time <- Sys.time() - start_time # calculate difference
-print(end_time) # 6 seconds
+# print(end_time) # 6 seconds
 
 
 

@@ -8,14 +8,7 @@ An `offcanvas_button` object created using the `flexlayout` package.
 }
 \usage{
 # To use the predefined right_button:
-flexlayout(
-  left = NULL,
-  center,
-  right = NULL,
-  right_button = right_button,
-  left_width = 22,
-  center_width = 56,
-  right_width = 22
+right_button(
 )
 }
 \description{

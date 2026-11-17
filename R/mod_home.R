@@ -103,7 +103,7 @@ mod_home_ui <- function(id){
           bslib::accordion_panel(
             title = h2("About the Dashboard"),
             value = "cord_about_dash",
-           "To navigate this dashboard, start by selecting a page from the left sidebar. Once on the selected page, choose a relevant topic from the 'Topic' dropdown menu to display an interactive visualization. The ‘Filter’ dropdown menu defaults to “All LHDs,” but when available, you can refine results by filtering for LHD characteristics such as Rurality, LHD Size, Region, or Governance.",
+            "To navigate this dashboard, start by selecting a page from the left sidebar. Once on the selected page, choose a relevant topic from the 'Topic' dropdown menu to display an interactive visualization. The 'Filter' dropdown menu defaults to \"All LHDs,\" but when available, you can refine results by filtering for LHD characteristics such as Rurality, LHD Size, Region, or Governance.",
            br(),
 
 "Topics may include various views, such as bar/column charts, line graphs, or tables. You can switch between these views by selecting the corresponding icons located underneath the 'Topic' and 'Filter' dropdown menus. Key takeaways, notes, and definitions are displayed in the right sidebar. On smaller screens, this sidebar may be hidden and can be shown by clicking the 'i' icon at the top-right of the screen. For some topics, additional input options may appear in the right sidebar and will toggle visible automatically.",

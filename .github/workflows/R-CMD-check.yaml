@@ -44,6 +44,13 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
+      # Universal fix: Force git2r to use its bundled libgit2
+      - name: Reinstall git2r with bundled libgit2
+        shell: Rscript {0}
+        run: |
+          install.packages("git2r", type = "source",
+                           configure.vars = "--without-libgit2")
+
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true

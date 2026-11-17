@@ -844,7 +844,7 @@ mod_services_server <- function(id) {
           )
         })
 
-        print(length(links))
+        # print(length(links))
 
         div(
           p(htmltools::HTML("<b>Definitions</b>: <br>")),

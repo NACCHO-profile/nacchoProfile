@@ -365,7 +365,7 @@ master_data22 <- master_data22 %>%
 
 # print elapsed time
 end_time <- Sys.time() - start_time # calculate difference
-print(end_time) # 6 seconds
+# print(end_time) # 6 seconds
 
 
 

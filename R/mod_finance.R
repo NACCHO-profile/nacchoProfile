@@ -382,7 +382,7 @@ mod_finance_server <- function(id){
       # req(input$topic == "totexp_percap")
       req(input$filter == "All LHDs")
 
-      print(head(filter_meta()))
+      # print(head(filter_meta()))
 
       topic <- input$topic
       filtering <- input$filter
@@ -916,7 +916,7 @@ mod_finance_server <- function(id){
       max_one <- max(data$left)
       max_two <- max(data$right)
 
-      message("max_one = ", max_one, " max_two = ", max_two)
+      # message("max_one = ", max_one, " max_two = ", max_two)
 
       set_bar(data,
               y_label = NA,
@@ -1221,16 +1221,16 @@ mod_finance_server <- function(id){
       }
 
       #debug
-      message("input$topic = ")
-      print(input$topic)
-      message("topic variable = ")
-      print(topic)
+      # message("input$topic = ")
+      # print(input$topic)
+      # message("topic variable = ")
+      # print(topic)
 
       #debug
-      message("input$filter = ")
-      print(input$filter)
-      message("filtering variable = ")
-      print(filtering)
+      # message("input$filter = ")
+      # print(input$filter)
+      # message("filtering variable = ")
+      # print(filtering)
 
 
 
@@ -1242,8 +1242,8 @@ mod_finance_server <- function(id){
           dplyr::across(dplyr::starts_with("Responses_"), ~ ifelse(is.na(.), 0, .))
         )
 
-      message("data =")
-      print(data)
+      # message("data =")
+      # print(data)
 
 
       # Define colors reactively based on the filter
@@ -1259,8 +1259,8 @@ mod_finance_server <- function(id){
         input$filter == "All LHDs" ~ "All LHDs"
       )
 
-      message("data =")
-      print(data)
+      # message("data =")
+      # print(data)
 
       # Call the table creation function with the appropriate data and parameters
       create_non_time_table(data, category, colors, topic)
@@ -1345,7 +1345,7 @@ mod_finance_server <- function(id){
           )
         })
 
-        print(length(links))
+        # print(length(links))
 
         div(
           p(htmltools::HTML("<b>Definitions</b>: <br>")),

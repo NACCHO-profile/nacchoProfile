@@ -6,12 +6,50 @@
 
 # Suppress R CMD check warnings for these global variables
 
-globalVariables(
-  c(".data", "master_data"))
+utils::globalVariables(c(
+  # rlang / dplyr pronouns & operators
+  ".data", ".", ":=", "everything", "all_of",
+
+  # package data objects referenced via get()/bare name
+  "master_data", "master_data22", "service_cats", "source_line",
+  "source_line_2022", "spec_data", "spec_data_all", "classification_data_b",
+  "jobs_data", "budget_data", "services_data", "services_change_data",
+  "tech_use_data", "comms_use_data", "med_data", "dental_data",
+  "behav_data", "advocacy_data", "new_advocacy_data", "chip_data",
+  "revenue_percentages", "revenue_percentages_filter",
+
+  # dplyr column names used inside data-masked verbs
+  "Answer", "AnswerLabel", "All_LHDs", "Plus1000k", "Group", "Mean",
+  "Median", "Percentage", "Quantile_q25", "Quantile_q50", "Quantile_q75",
+  "Question", "Responses", "Responses_All LHDs", "Total", "Type",
+  "action", "advocacy_type", "authority", "base", "cat_base", "category",
+  "c10q301", "comms_type", "comms_use", "debounce_time", "field",
+  "fig_value", "fig_value_All_LHDs", "finance_topics", "group",
+  "group_mod", "group_responses", "jobsgain", "jobsgone",
+  "landscape_filters", "landscape_topics", "left", "legend_label",
+  "mils", "name", "new_advocacy_type", "one", "other_topics", "parent",
+  "partner", "partner_type", "partnerships", "perc", "percentage",
+  "policy_area", "previous_perc", "revenue_type", "right", "rurality",
+  "service_classification", "service_classifications",
+  "service_provision", "service_topics", "service_type",
+  "source_line", "source_line_2022", "state_name", "subtitle", "suffix",
+  "tech_type", "tenure_numcat", "total_employees", "tt", "tt_base",
+  "value", "view", "weights", "workforce_classifications",
+  "workforce_topics", "x", "y", "y_All LHDs", "year",
+
+  # inputs and helpers used inside modules
+  "input", "return_survey_weighted_statistics_2022",
+
+  # base/stats/utils functions reported as no visible global def
+  "hist", "head", "tail", "setNames",
+  "state.abb", "state.name"
+))
 
 # Mapping for standardized labels
 # These labels are used for displaying consistent text in reports and visualizations.
 
+#' @keywords internal
+#' @noRd
 label_remap <- c(
   "Under 40" = "Younger than 40",
   "40-49 years" = "40-49",
@@ -53,6 +91,8 @@ label_remap <- c(
 # Mapping for questionnaire codes to human-readable labels
 # These codes correspond to questions in survey data.
 
+#' @keywords internal
+#' @noRd
 q_remap <- c(
     "c4q26" = "Work-Status",
     "c4q28" = "Ethnicity",

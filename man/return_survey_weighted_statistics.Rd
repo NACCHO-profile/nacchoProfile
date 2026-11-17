@@ -27,7 +27,6 @@ tibble
 Calculate weighted statistics results: total, mean, and quantiles.
 }
 \examples{
-return_survey_weighted_statistics("tenure")
 return_survey_weighted_counts("c5q36", grps = "c0popcat7", wtype = "weights_static")
 
 }

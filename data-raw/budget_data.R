@@ -79,7 +79,7 @@ budget_data <- rbind(budget_changes_with_filters, budget_changes_no_filters)
 
 # Print elapsed time
 end_time <- Sys.time() - start_time # calculate time difference
-print(end_time)
+# print(end_time)
 
 # Save the budget_data dataset
 usethis::use_data(budget_data, overwrite = TRUE)

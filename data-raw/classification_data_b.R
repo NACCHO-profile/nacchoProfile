@@ -75,7 +75,7 @@ classification_data_b <- classification_data_b %>%
 
 # print elapsed time
 end_time <- Sys.time() - start_time # calculate difference
-print(end_time) # 1.073727 mins
+# print(end_time) # 1.073727 mins
 
 
 usethis::use_data(classification_data_b, overwrite = TRUE)

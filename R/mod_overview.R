@@ -222,58 +222,58 @@ mod_overview_server <- function(id){
         stringsAsFactors = FALSE
       )
 
-      # Use the actual assigned governance categories in the dataset.
-      # A state is Mixed when it contains two or more distinct categories.
-      state_governance <- master_data %>%
-        dplyr::transmute(
-          c0state = as.character(c0state),
-          govcat = tolower(trimws(as.character(c0govcat)))
-        ) %>%
-        dplyr::filter(
-          !is.na(c0state),
-          !is.na(govcat),
-          govcat %in% c("local", "state", "shared")
-        ) %>%
-        dplyr::group_by(c0state) %>%
-        dplyr::summarise(
-          grouping = if (dplyr::n_distinct(govcat) > 1L) {
-            "Mixed"
-          } else {
-            switch(
-              dplyr::first(govcat),
-              local = "Local",
-              state = "State",
-              shared = "Shared"
-            )
-          },
-          .groups = "drop"
-        )
+      # Hardcoded state governance classifications ----------------------------
+
+      state_governance <- data.frame(
+        c0state = c(
+          "AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL",
+          "GA", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA",
+          "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE",
+          "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "SC",
+          "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"
+        ),
+
+        grouping = c(
+          "Local", "Mixed", "State", "Local", "Local",
+          "Local", "Local", "State", "State", "State",
+          "Shared", "State", "Local", "Local", "Local",
+          "Local", "Local", "Shared", "Mixed", "Local",
+          "Mixed", "Mixed", "Local", "Local", "Local",
+          "State", "Local", "Local", "Local", "Local",
+          "Local", "Local", "State", "Local", "Local",
+          "Mixed", "Mixed", "Local", "Mixed", "State",
+          "Local", "Mixed", "Mixed", "Local", "Mixed",
+          "Local", "Local", "Local", "Local", "Mixed"
+        ),
+
+        stringsAsFactors = FALSE
+      )
 
       # Include all states in the map; states with no observations are NA.
-      data <- state_lookup %>%
-        dplyr::left_join(state_governance, by = "c0state") %>%
-        dplyr::mutate(
-          grouping = dplyr::coalesce(grouping, "NA"),
-          value_tt = dplyr::if_else(
-            state_name == "Rhode Island",
-            paste(
-              "NA. Rhode Island was excluded from the study because",
-              "the state health agency operates on behalf of local",
-              "public health and has no sub-state units"
-            ),
-            dplyr::if_else(
-              grouping == "NA",
-              "not available in the dataset",
-              tolower(grouping)
-            )
-          )
-        )
+data <- state_lookup %>%
+  dplyr::left_join(state_governance, by = "c0state") %>%
+  dplyr::mutate(
+    grouping = dplyr::coalesce(grouping, "NA"),
+    value_tt = dplyr::if_else(
+      state_name == "Rhode Island",
+      paste(
+        "NA. Rhode Island was excluded from the study because",
+        "the state health agency operates on behalf of local",
+        "public health and has no sub-state units"
+      ),
+      dplyr::if_else(
+        grouping == "NA",
+        "not available in the dataset",
+        tolower(grouping)
+      )
+    )
+  )
 
       colors <- c(
-        "Local" = naccho.viz::green,
+        "Local" = naccho.viz::teal,
         "State" = naccho.viz::navy,
         "Shared" = naccho.viz::terracotta,
-        "Mixed" = naccho.viz::teal,
+        "Mixed" = naccho.viz::green,
         "NA" = naccho.viz::grey
       )
 
