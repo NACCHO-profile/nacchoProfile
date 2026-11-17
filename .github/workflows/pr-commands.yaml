@@ -29,6 +29,12 @@ jobs:
           extra-packages: any::roxygen2
           needs: pr-document
 
+      - name: Reinstall git2r without system libgit2
+        shell: Rscript {0}
+        run: |
+          install.packages("git2r", type = "source",
+                           configure.vars = "--without-libgit2")
+
       - name: Document
         run: roxygen2::roxygenise()
         shell: Rscript {0}
