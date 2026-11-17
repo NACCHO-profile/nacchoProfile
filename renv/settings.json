@@ -1,4 +1,5 @@
 {
+  "bioconductor.enabled": true,
   "bioconductor.version": null,
   "external.libraries": [
     "~/Rlibs"
@@ -6,6 +7,7 @@
   "ignored.packages": [
     "nacchoProfile"
   ],
+  "lockfile.sanitize": true,
   "package.dependency.fields": [
     "Imports",
     "Depends",
@@ -14,6 +16,7 @@
   "ppm.enabled": null,
   "ppm.ignored.urls": [],
   "r.version": "4.2.0",
+  "snapshot.dev": false,
   "snapshot.type": "explicit",
   "use.cache": true,
   "vcs.ignore.cellar": true,

@@ -91,8 +91,6 @@ process_weighted_stats <- function(topic, filtering = NULL) {
 #' If standardized, it calculates job metrics as percentages of total employees.
 #'
 #' @param jobs_data A data frame containing jobs data.
-#' @param is_standardized A logical value indicating whether the data should be
-#' processed in a standardized format (as percentages).
 #' @return A processed data frame with job-related statistics.
 #' @import dplyr
 process_jobs_data <- function(jobs_data, filtering = "All LHDs" ) {

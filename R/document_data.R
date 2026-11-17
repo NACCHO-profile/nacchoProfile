@@ -1,21 +1,28 @@
-#' The National Profile of Local Health Departments, 2022
+#' Master data: NACCHO 2025 Profile
 #'
-#' @author National Association of City and County Health Officials (NACCHO)
-#' @references \email{research@@naccho.org}
-#' @references \url{www.naccho.org}
+#' Cleaned and derived respondent-level data from the 2025 National Profile
+#' of Local Health Departments dashboard dataset. Contains the raw survey
+#' variables (names prefixed `c0`–`c14`, `m6`–`m14`, etc.) plus derived
+#' fields used across the dashboard.
 #'
-#'
-#' @format data.frame
-#'
-#' A data frame with 942 rows and 910 columns:
-#' \describe{
-#'   \item{nacchoid}{NACCHO ID}
-#'   \item{c0popcat7}{7 level population categories}
-#'   ...
+#' Key derived columns include:
+#' \itemize{
+#'   \item `c0popcat3`: ordered factor — Small (<50,000),
+#'     Medium (50,000-499,999), Large (500,000+)
+#'   \item `employee_bypop`: employees per 10,000 population
+#'   \item `employee_numcat`: labelled numeric employee-count category
+#'   \item `rev_total`, `rev_percap`: total revenue and revenue per capita
+#'   \item `exp_total_numcat`, `rev_total_numcat`: ordered factor
+#'     expenditure / revenue brackets
+#'   \item `exp_percap_numcat`, `rev_percap_numcat`: ordered factor
+#'     per-capita brackets
+#'   \item `fips`, `state_name`: FIPS code and state name (from `usmap`)
 #' }
-#' @source National Association of City and County Health Officials (NACCHO)
+#'
+#' @format A data frame with one row per LHD and ~1,200 variables. See the
+#'   `data-raw/` scripts for the full derivation.
+#' @source NACCHO National Profile of Local Health Departments, 2025.
 "master_data"
-
 
 
 
@@ -413,3 +420,40 @@
 #'
 #' @source National Association of City and County Health Officials (NACCHO)
 "partnerships"
+
+
+#' Master data 2022
+#'
+#' Respondent-level data from the 2022 Profile study, with the same derived
+#' fields as \code{master_data}.
+#'
+#' @format A data frame; see \code{\link{master_data}} for column details.
+#' @source NACCHO National Profile of Local Health Departments, 2022.
+"master_data22"
+
+#' Service categories
+#'
+#' Lookup table mapping LHD service categories to classification and
+#' provision values used in the services module.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'   \item{service_classification}{Service classification label}
+#'   \item{service_provision}{Provision category}
+#'   \item{service_type}{Service type}
+#'   \item{service_cats}{Display label}
+#' }
+"service_cats"
+
+#' Source line 2022
+#'
+#' Source/citation metadata used for figure footnotes in the 2022 Profile
+#' figures (e.g. sample size, weighting note, year).
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'   \item{source_line}{Citation / source line text}
+#'   \item{source_line_2022}{Citation text for 2022 comparisons}
+#'   \item{year}{Survey year}
+#' }
+"source_line_2022"
