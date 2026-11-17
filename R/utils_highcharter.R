@@ -158,11 +158,11 @@ set_column <- function(data,
   # Also check for non-printing characters or unusual encodings
   data$category <- iconv(data$category, "latin1", "UTF-8")
 
-  print(data$category)
+  # print(data$category)
 
   x_axis_labels <- as.list(unique(data$category))
 
-  print(x_axis_labels)
+  # print(x_axis_labels)
 
   highcharter::hchart(
     data,
@@ -1454,7 +1454,7 @@ data <- data %>%
 #'
 #' @importFrom dplyr filter mutate case_when
 #' @export
-process_classification_data <- function(topic, classifications, filtering) {
+process_classification_data <- function(topic, classifications, filtering, q_remap = q_remap) {
 
   if (!is.null(classifications) && length(classifications) >= 1) {
     selected_vars <- paste0(classifications, topic)

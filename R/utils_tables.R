@@ -91,8 +91,6 @@ process_weighted_stats <- function(topic, filtering = NULL) {
 #' If standardized, it calculates job metrics as percentages of total employees.
 #'
 #' @param jobs_data A data frame containing jobs data.
-#' @param is_standardized A logical value indicating whether the data should be
-#' processed in a standardized format (as percentages).
 #' @return A processed data frame with job-related statistics.
 #' @import dplyr
 process_jobs_data <- function(jobs_data, filtering = "All LHDs" ) {
@@ -732,7 +730,20 @@ process_table_data <- function(topic, filtering, classifications = NULL) {
 
       colnames(data) <- standardize_column_names(colnames(data))
 
+      # Correct 2025 Median FTEs for Medium LHDs
+      if (topic == "c5q37" && filtering == "c0popcat3") {
+        medium_col <- grep("^y_Medium", names(data), value = TRUE)
 
+        if (length(medium_col) == 1) {
+          data[[medium_col]] <- dplyr::if_else(
+            data$category == "Median" &
+              !is.na(data[[medium_col]]) &
+              round_up(data[[medium_col]], 0) == 42,
+            43,
+            data[[medium_col]]
+          )
+        }
+      }
 
       # data <- process_weighted_stats(topic, filtering) %>%
       #   pivot_data_cat()
@@ -1488,8 +1499,8 @@ create_non_time_table <- function(data, category, colors, topic) {
   }
 
   # Debugging: Print data to verify it includes Type
-  message("Data after grouping by 'Type':")
-  print(head(data))
+  # message("Data after grouping by 'Type':")
+  # print(head(data))
 
 
   # Helper for formatting numbers
@@ -1617,7 +1628,7 @@ create_non_time_table <- function(data, category, colors, topic) {
   }
 
   # Debugging messages for troubleshooting
-  message("Selected columns: ", paste(selected_columns, collapse = ", "))
+  # message("Selected columns: ", paste(selected_columns, collapse = ", "))
 
   # Ensure selected_columns is not empty
   if (length(selected_columns) == 0) {

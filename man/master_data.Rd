@@ -3,32 +3,36 @@
 \docType{data}
 \name{master_data}
 \alias{master_data}
-\title{The National Profile of Local Health Departments, 2022}
+\title{Master data: NACCHO 2025 Profile}
 \format{
-data.frame
-
-A data frame with 942 rows and 910 columns:
-\describe{
-  \item{nacchoid}{NACCHO ID}
-  \item{c0popcat7}{7 level population categories}
-  ...
-}
+A data frame with one row per LHD and ~1,200 variables. See the
+  `data-raw/` scripts for the full derivation.
 }
 \source{
-National Association of City and County Health Officials (NACCHO)
+NACCHO National Profile of Local Health Departments, 2025.
 }
 \usage{
 master_data
 }
 \description{
-The National Profile of Local Health Departments, 2022
+Cleaned and derived respondent-level data from the 2025 National Profile
+of Local Health Departments dashboard dataset. Contains the raw survey
+variables (names prefixed `c0`–`c14`, `m6`–`m14`, etc.) plus derived
+fields used across the dashboard.
 }
-\references{
-\email{research@naccho.org}
-
-\url{www.naccho.org}
+\details{
+Key derived columns include:
+\itemize{
+  \item `c0popcat3`: ordered factor — Small (<50,000),
+    Medium (50,000-499,999), Large (500,000+)
+  \item `employee_bypop`: employees per 10,000 population
+  \item `employee_numcat`: labelled numeric employee-count category
+  \item `rev_total`, `rev_percap`: total revenue and revenue per capita
+  \item `exp_total_numcat`, `rev_total_numcat`: ordered factor
+    expenditure / revenue brackets
+  \item `exp_percap_numcat`, `rev_percap_numcat`: ordered factor
+    per-capita brackets
+  \item `fips`, `state_name`: FIPS code and state name (from `usmap`)
 }
-\author{
-National Association of City and County Health Officials (NACCHO)
 }
 \keyword{datasets}

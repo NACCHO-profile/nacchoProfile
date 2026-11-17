@@ -45,7 +45,7 @@ app_server <- function(input, output, session) {
 
 
   observe({
-    if (!is.null(input$tabs) && input$tabs == "overview_tab" && !modal_shown()) {
+    if (isTRUE(input$tabs == "overview_tab") && !modal_shown()) {
       showModal(modalDialog(
         title = "About the Denominator of LHDs",
         HTML("<p>For the purposes of surveying and developing national estimates of

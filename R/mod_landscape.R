@@ -270,7 +270,7 @@ mod_landscape_server <- function(id){
 
     # update inputs based on selections ---------------------------------------
     observe({
-      if (input$topic %in% c("c2q501", "lboh")) {
+      if (isTRUE(input$topic %in% c("c2q501", "lboh"))) {
         shinyWidgets::updateRadioGroupButtons(session, "view",
                                               choiceNames = list(
                                                 HTML('<i class="fas fa-chart-simple"></i>'),
@@ -1106,7 +1106,7 @@ mod_landscape_server <- function(id){
           )
         })
 
-        print(length(links))
+        # print(length(links))
 
         div(
           p(htmltools::HTML("<b>Definitions</b>: <br>")),

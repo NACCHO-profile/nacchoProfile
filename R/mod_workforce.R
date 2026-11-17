@@ -404,7 +404,7 @@ mod_workforce_server <- function(id) {
       selected_view <- input$view
       selected_filter <- unlist(input$filter)
 
-      print(selected_filter)
+      # print(selected_filter)
 
       if (input$topic %in% c("c5q37", "c5q36", "fte_bypop")) {
         updateSelectInput(session, "filter",
@@ -798,7 +798,7 @@ mod_workforce_server <- function(id) {
         line_graph %>%
           viz_options(
             viz_caption = paste(
-              "<b> N: </b>", show_n(data$Responses),
+              "<b> N: </b>", show_n(sort(as.numeric(data$Responses))),
               "<br>", source_line
             ),
             tooltip = filter_meta()$tooltip
@@ -1056,7 +1056,7 @@ mod_workforce_server <- function(id) {
           )
         })
 
-        print(length(links))
+        # print(length(links))
 
         div(
           p(htmltools::HTML("<b>Definitions</b>: <br>")),
@@ -1099,7 +1099,7 @@ mod_workforce_server <- function(id) {
       cat("Filter:", input$filter, "\n")
       cat("Data passed to line chart:\n")
 
-      print(line_data)
+      # print(line_data)
     })
 
 

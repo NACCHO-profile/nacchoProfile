@@ -608,7 +608,6 @@ add_all_counts_long_2022 <- function(
 #' @importFrom srvyr as_survey_design survey_total survey_mean survey_quantile
 #'
 #' @examples
-#' return_survey_weighted_statistics("tenure")
 #' return_survey_weighted_counts("c5q36", grps = "c0popcat7", wtype = "weights_static")
 #'
 #' @return tibble

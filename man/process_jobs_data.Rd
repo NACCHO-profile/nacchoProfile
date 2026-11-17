@@ -8,9 +8,6 @@ process_jobs_data(jobs_data, filtering = "All LHDs")
 }
 \arguments{
 \item{jobs_data}{A data frame containing jobs data.}
-
-\item{is_standardized}{A logical value indicating whether the data should be
-processed in a standardized format (as percentages).}
 }
 \value{
 A processed data frame with job-related statistics.
