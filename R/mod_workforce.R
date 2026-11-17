@@ -492,7 +492,15 @@ mod_workforce_server <- function(id) {
 
       topic <- input$topic
       filtering <- input$filter
-      classifications <- NULL
+
+      shiny::req(topic, filtering)
+
+      if (topic %in% c("a", "b")) {
+        shiny::req(
+          !is.null(input$classifications),
+          length(input$classifications) > 0
+        )
+      }
 
       classifications <- if (!is.null(input$classifications) && length(input$classifications) > 0) {
         input$classifications
