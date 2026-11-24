@@ -13,13 +13,11 @@ add_all_counts_long(q_label, popcat = "c0popcat7", wtype = "weights")
 
 \item{wtype}{The type of weights to use: "weights" or "weights_static"}
 }
-\value{
-tibble
-}
 \description{
 Calculate weighted results for categorical questions for use in tables.
 }
 \examples{
-add_all_counts_long("c3q15")
-
+\dontrun{
+  add_all_counts_long("c3q15")
+}
 }

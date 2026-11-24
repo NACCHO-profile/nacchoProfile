@@ -5,50 +5,138 @@
 
 <!-- badges: start -->
 
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![R-CMD-check](https://github.com/madocalder/nacchoProfile/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/madocalder/nacchoProfile/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/NACCHO-profile/nacchoProfile/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/NACCHO-profile/nacchoProfile/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of nacchoProfile is to …
+A Shiny application that visualizes findings from NACCHO’s National
+Profile of Local Health Departments.
 
-## Installation
+## ⚠️ Prerequisites
 
-You can install the development version of nacchoProfile like so:
+This repository references two **private** data repositories as Git
+submodules:
 
-``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+- `NACCHO-profile/nacchoProfile_data` — compiled `.rda` datasets
+- `NACCHO-profile/nacchoProfile_dataraw` — raw data and derivation
+  scripts
+
+Without access to these private repos, `data/` and `data-raw/` will be
+empty after cloning, and the app will fail to load its datasets.
+
+### Access requirements
+
+1.  **Organization membership** — You must be a member of the
+    `NACCHO-profile` GitHub organization, or have been granted read
+    access to both private data repos. Contact the maintainer to request
+    access.
+
+2.  **SSH key registered with GitHub** — Submodules use
+    `git@github.com:` URLs. Verify with:
+
+    ``` sh
+    ssh -T git@github.com
+    ```
+
+    Expected output:
+    `Hi <username>! You've successfully authenticated...`
+
+## Setup
+
+### Clone with submodules
+
+``` sh
+git clone --recurse-submodules git@github.com:NACCHO-profile/nacchoProfile.git
+cd nacchoProfile
 ```
 
-## Example
+If you already cloned without `--recurse-submodules`, populate the
+submodules:
 
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(nacchoProfile)
-## basic example code
+``` sh
+git submodule update --init --recursive
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+Or from the R console:
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+system2("git", c("submodule", "update", "--init", "--recursive"))
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
+### Restore R dependencies
 
-You can also embed plots, for example:
+``` r
+renv::restore()
+```
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+### Run the app
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+``` r
+shiny::runApp()
+```
+
+Or install as a package and launch via the exported function:
+
+``` r
+devtools::install()
+nacchoProfile::run_app()
+```
+
+### Update the data
+
+The `data/` submodule pins a specific commit of `nacchoProfile_data`. To
+pull the latest datasets:
+
+``` sh
+git submodule update --remote data
+git add data
+git commit -m "Update data submodule"
+```
+
+## How data is loaded
+
+The `.rda` files in `data/` are **package datasets**, documented in
+`R/document_data.R` (e.g. `master_data`, `meta`, `spec_data`). They are
+lazy-loaded when the package is installed, so `master_data` is available
+directly after `library(nacchoProfile)` without an explicit `data()`
+call.
+
+The `data-raw/` submodule contains the derivation scripts used to
+produce those `.rda` files. It is **excluded from the package build**
+(`.Rbuildignore`) and is only needed when regenerating datasets.
+
+## Deployment (shinyapps.io)
+
+The app deploys to shinyapps.io under the `naccho` account. The
+deployment record lives at
+`rsconnect/shinyapps.io/naccho/nacchoProfile.dcf`.
+
+**Critical:** `rsconnect::deployApp()` bundles the *local working
+directory*. Before deploying, confirm the submodules are populated:
+
+``` sh
+git submodule status
+# Both lines should start with a commit SHA, not '-'
+```
+
+If either starts with `-`, run:
+
+``` sh
+git submodule update --init --recursive
+```
+
+Otherwise the deployed app will ship with empty `data/` and fail to load
+its datasets at runtime.
+
+## Troubleshooting
+
+| Symptom | Cause | Fix |
+|----|----|----|
+| `data/` is empty after clone | Cloned without `--recurse-submodules` | `git submodule update --init --recursive` |
+| `Permission denied (publickey)` | SSH key not registered, or not authorized for the org | `ssh -T git@github.com`; confirm org membership |
+| `Repository not found` | No read access to the private data repos | Request access from the maintainer |
+| `object 'master_data' not found` after load | `data/` submodule empty at install time | Re-run `git submodule update --init --recursive`, reinstall |
+| Deployed app loads but charts are empty | Submodules were empty at `deployApp()` time | Populate submodules, redeploy |
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
