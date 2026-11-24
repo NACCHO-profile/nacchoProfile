@@ -1,6 +1,6 @@
 [submodule "data"]
 	path = data
-	url = git@github.com:madocalder/nacchoProfile_data.git
+	url = git@github.com:NACCHO-profile/nacchoProfile_data.git
 [submodule "data-raw"]
 	path = data-raw
-	url = git@github.com:madocalder/nacchoProfile_dataraw.git
+	url = git@github.com:NACCHO-profile/nacchoProfile_dataraw.git
