@@ -6,10 +6,14 @@
 dev_history.R
 ^dev$
 $run_dev.*
-^.here$
+^\.here$
 ^README\.Rmd$
 ^CODE_OF_CONDUCT\.md$
 ^\.github$
 ^app\.R$
 ^rsconnect$
 ^LICENSE\.md$
+^data/\.git$
+^data-raw/\.git$
+^\.Rprofile\.renv-disabled$
+^test_naccho_map_files$

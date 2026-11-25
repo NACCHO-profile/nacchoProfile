@@ -11,7 +11,7 @@ utils::globalVariables(c(
   ".data", ".", ":=", "everything", "all_of",
 
   # package data objects referenced via get()/bare name
-  "master_data", "master_data22", "service_cats", "source_line",
+  "master_data", "master_data22", "meta", "service_cats", "source_line",
   "source_line_2022", "spec_data", "spec_data_all", "classification_data_b",
   "jobs_data", "budget_data", "services_data", "services_change_data",
   "tech_use_data", "comms_use_data", "med_data", "dental_data",
