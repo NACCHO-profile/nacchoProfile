@@ -29,7 +29,6 @@ jobs:
     env:
       R_KEEP_PKG_SOURCE: yes
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      R_PKG_CONFIG_CONFIGURE_VARS: "git2r=--without-libgit2"
 
     steps:
       - uses: actions/checkout@v4
@@ -44,6 +43,15 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
+
+      # Pre-install git2r with its bundled libgit2 to avoid the macOS
+      # configure failure (missing system libgit2/openssl/libssh2).
+      # pak will then skip rebuilding it during lockfile_install.
+      - name: Pre-install git2r without system libgit2
+        run: |
+          install.packages("git2r", type = "source",
+                           configure.vars = "--without-libgit2")
+        shell: Rscript {0}
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
