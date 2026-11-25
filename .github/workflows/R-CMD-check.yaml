@@ -43,11 +43,12 @@ jobs:
           use-public-rspm: true
 
       # Install native libraries needed by git2r on macOS.
-      # pak/setup-r-dependencies does NOT install system deps on macOS.
+      # libgit2 now depends on llhttp for HTTP parsing; linker needs the path.
       - name: Install macOS native dependencies
         if: runner.os == 'macOS'
         run: |
-          brew install libgit2 openssl libssh2
+          brew install libgit2 llhttp openssl libssh2
+          echo "LIBRARY_PATH=$(brew --prefix)/lib:$LIBRARY_PATH" >> $GITHUB_ENV
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
