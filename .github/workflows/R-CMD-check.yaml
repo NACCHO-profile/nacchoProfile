@@ -9,8 +9,6 @@ name: R-CMD-check
 
 jobs:
   R-CMD-check:
-    # Skip fork PRs: SUBMODULE_PAT is not available to workflows triggered by forks,
-    # and without it the private data submodules cannot be fetched.
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false
     runs-on: ${{ matrix.config.os }}
 
@@ -44,14 +42,12 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      # Pre-install git2r with its bundled libgit2 to avoid the macOS
-      # configure failure (missing system libgit2/openssl/libssh2).
-      # pak will then skip rebuilding it during lockfile_install.
-      - name: Pre-install git2r without system libgit2
+      # Install native libraries needed by git2r on macOS.
+      # pak/setup-r-dependencies does NOT install system deps on macOS.
+      - name: Install macOS native dependencies
+        if: runner.os == 'macOS'
         run: |
-          install.packages("git2r", type = "source",
-                           configure.vars = "--without-libgit2")
-        shell: Rscript {0}
+          brew install libgit2 openssl libssh2
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
