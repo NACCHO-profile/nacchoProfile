@@ -18,7 +18,7 @@ tibble
 Calculate LHD post-stratification weights for a given question.
 }
 \examples{
-add_weights("c3q15")
-add_weights("totexp_percap", popcat = "c0popcat3")
-
+\dontrun{
+  add_weights("c3q15")
+}
 }

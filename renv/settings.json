@@ -15,7 +15,6 @@
   ],
   "ppm.enabled": null,
   "ppm.ignored.urls": [],
-  "r.version": "4.2.0",
   "snapshot.dev": false,
   "snapshot.type": "explicit",
   "use.cache": true,

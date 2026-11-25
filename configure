@@ -1,0 +1,5 @@
+#!/bin/sh
+if [ -d ".git" ]; then
+  echo "Pulling data submodules..."
+  git submodule update --init --recursive
+fi

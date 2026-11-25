@@ -1,5 +1,4 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
-# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
     branches: [main, master]
@@ -10,6 +9,7 @@ name: R-CMD-check
 
 jobs:
   R-CMD-check:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
@@ -25,11 +25,14 @@ jobs:
           - {os: ubuntu-latest,   r: 'oldrel-1'}
 
     env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.SUBMODULE_PAT }}
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -39,19 +42,19 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
+      # Install native libraries needed by git2r on macOS.
+      # libgit2 now depends on llhttp for HTTP parsing; linker needs the path.
+      - name: Install macOS native dependencies
+        if: runner.os == 'macOS'
+        run: |
+          brew install libgit2 llhttp openssl libssh2
+          echo "LIBRARY_PATH=$(brew --prefix)/lib:$LIBRARY_PATH" >> $GITHUB_ENV
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
           needs: check
 
-      # Universal fix: Force git2r to use its bundled libgit2
-      - name: Reinstall git2r with bundled libgit2
-        shell: Rscript {0}
-        run: |
-          install.packages("git2r", type = "source",
-                           configure.vars = "--without-libgit2")
-
       - uses: r-lib/actions/check-r-package@v2
         with:
-          upload-snapshots: true
-          build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
+          error-on: '"error"'

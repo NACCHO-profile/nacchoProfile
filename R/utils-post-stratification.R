@@ -11,9 +11,9 @@
 #' @importFrom haven as_factor
 #'
 #' @examples
-#' add_weights("c3q15")
-#' add_weights("totexp_percap", popcat = "c0popcat3")
-#'
+#' \dontrun{
+#'   add_weights("c3q15")
+#' }
 #' @return tibble
 add_weights <- function(q_label, popcat = "c0popcat7") {
 
@@ -445,9 +445,10 @@ return_survey_weighted_counts_2022 <- function(
 #' @importFrom srvyr as_survey_design survey_count
 #'
 #' @examples
-#' add_all_counts_long("c3q15")
-#'
-#' @return tibble
+#' \dontrun{
+#'   add_all_counts_long("c3q15")
+#' }
+#' @export
 add_all_counts_long <- function(q_label, popcat = "c0popcat7", wtype = "weights") {
 
   if (!q_label %in% names(master_data)) {

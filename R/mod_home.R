@@ -137,7 +137,7 @@ br(),
             Pierre Saoter from the Y Company, and Elizabeth Woods from ASTHO.
             To see more visit ",
 
-            tags$a(href="https://github.com/madocalder/nacchoProfile",
+            tags$a(href="https://github.com/NACCHO-profile/nacchoProfile.git",
                    "the nacchoProfile GitHub repository",
                    style = "text-decoration: underline !important;"),
             "."
