@@ -92,7 +92,7 @@ git add data
 git commit -m "Update data submodule"
 ```
 
-## How data is loaded
+## How data are loaded
 
 The `.rda` files in `data/` are **package datasets**, documented in
 `R/document_data.R` (e.g. `master_data`, `meta`, `spec_data`). They are
