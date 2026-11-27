@@ -1540,7 +1540,7 @@ create_non_time_table <- function(data, category, colors, topic) {
     } else if (topic == "fte_bypop") {
       paste0(rounded_value, " FTEs")
     } else if (topic == "c5q37") {
-      paste0(rounded_value, " FTE")
+      paste0(rounded_value, " FTEs")
     } else if (topic == "employee_bypop") {
       paste0(rounded_value, " Employees")
     } else if (topic == "c5q36") {

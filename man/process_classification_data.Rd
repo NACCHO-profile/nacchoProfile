@@ -4,12 +4,7 @@
 \alias{process_classification_data}
 \title{Process Classification Data}
 \usage{
-process_classification_data(
-  topic,
-  classifications,
-  filtering,
-  q_remap = q_remap
-)
+process_classification_data(topic, classifications, filtering, q_remap)
 }
 \arguments{
 \item{topic}{A string representing the current topic (e.g., "a", "b").}

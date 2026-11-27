@@ -459,30 +459,40 @@ mod_workforce_server <- function(id) {
 
     # Generalized data processing for charts
     process_chart_data <- reactive({
-      req(!is.null(input$topic), !is.null(input$filter), !is.null(input$view))
-      # req(updated_inputs())
+      req(input$topic, input$filter, input$view)
 
       data <- if (input$topic %in% c("a", "b")) {
+
+        shiny::req(
+          !is.null(input$classifications),
+          length(input$classifications) > 0
+        )
+
         classification_data <- process_classification_data(
           topic = input$topic,
           classifications = input$classifications,
-          filtering = input$filter
-          # ,
-          # q_remap = q_remap
+          filtering = input$filter,
+          q_remap = q_remap
         )
+
         classification_data
 
       } else if (input$topic == "jobs_total") {
         filtered_butterfly("jobs_data") %>%
           dplyr::mutate(x_label = NA)
-      } else if (input$filter == "All LHDs"){
+
+      } else if (input$filter == "All LHDs") {
         return_survey_weighted_counts(input$topic) %>%
-          dplyr::mutate(x_label = NA,
-                        Responses = sum(Responses))
+          dplyr::mutate(
+            x_label = NA,
+            Responses = sum(Responses)
+          )
+
       } else {
         return_survey_weighted_counts(input$topic, input$filter) %>%
           dplyr::mutate(x_label = NA)
       }
+
       data
     })
 

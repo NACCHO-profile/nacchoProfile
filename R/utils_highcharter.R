@@ -1454,7 +1454,7 @@ data <- data %>%
 #'
 #' @importFrom dplyr filter mutate case_when
 #' @export
-process_classification_data <- function(topic, classifications, filtering, q_remap = q_remap) {
+process_classification_data <- function(topic, classifications, filtering, q_remap) {
 
   if (!is.null(classifications) && length(classifications) >= 1) {
     selected_vars <- paste0(classifications, topic)
